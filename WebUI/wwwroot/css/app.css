@@ -2,6 +2,11 @@ html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+@font-face {
+    font-family: "DM-Sans";
+    src: url('../fonts/DMSans-Regular.ttf')
+}
+
 h1:focus {
     outline: none;
 }

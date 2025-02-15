@@ -1,0 +1,15 @@
+﻿<div class="calisthenics-header-container">
+    <img class ="calisthenics-header-icon" src="icons/icon.png" />
+
+    <div class="calisthenics-header-title-text">
+        cali.Shop
+    </div>
+
+    <AuthorizeView>
+        <Authorized>
+            <NavLink class="nav-link" href="profile/@context.User.Identity!.Name" Match="NavLinkMatch.All">
+                <img class="calisthenics-header-icon-user" src="icons/user.png" />
+            </NavLink>
+        </Authorized>
+    </AuthorizeView>
+</div>

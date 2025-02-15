@@ -12,6 +12,6 @@ namespace Application.Services.UserServices
     {
         Task<LoginUserResponse> LoginUserService(LoginUserDTO loginUserDTO);
 
-        Task<RegisterUserResponse> RegisterUserService(RegisterUserDTO registerUserDTO)
+        Task<RegisterUserResponse> RegisterUserService(RegisterUserDTO registerUserDTO);
     }
 }
