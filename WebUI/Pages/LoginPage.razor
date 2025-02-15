@@ -1,5 +1,56 @@
-﻿<h3>LoginPage</h3>
+﻿@page "/login"
+@inject IUserService service;
+@inject NavigationManager navManager;
+@using Application.DTOs.UserDTOs.LoginUser
+@using Application.Services.UserServices
+@using WebUI.State
+
+<div class="main-container-login-form">
+    <img src="icons/icon.png"/>
+
+    <div class="basic-text-login-form">
+        Sign In
+    </div>
+
+    <div class="form-container">
+        <EditForm Model="@loginDTO" OnSubmit="Login">
+            <label for="email">Email</label>
+            <div class="form-container-input">
+                <InputText @bind-Value="loginDTO.email" id="email"></InputText>
+            </div>
+
+            <div class="form-container-row">
+                <label for="password">Password</label>
+
+                <a href="">Forgot password?</a>
+            </div>
+            <div class="form-container-input">
+                <InputText @bind-Value="loginDTO.password" id="password"></InputText>
+            </div>
+
+            <button class="form-button" type="submit">
+                <div class="form-button-text">
+                    Sign In
+                </div>
+            </button>
+        </EditForm>
+    </div>
+</div>
 
 @code {
+    private LoginUserDTO loginDTO = new LoginUserDTO();
 
+    private async Task Login()
+    {
+        if (loginDTO != null)
+        {
+            var result = await service.LoginUserService(loginDTO);
+            if (result.Flag == true)
+            {
+                var customAuthStateProvider = (CustomAuthStateProvider)authProvider;
+                await customAuthStateProvider.UpdateAuthState(result.token);
+                navManager.NavigateTo("/", forceLoad: true);
+            }
+        }
+    }
 }

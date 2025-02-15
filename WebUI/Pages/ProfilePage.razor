@@ -1,0 +1,15 @@
+﻿@page "/profile/{username}"
+
+@if(username != null)
+{
+    <p>@username</p>
+}
+else
+{
+    <p>Invalid profile</p>
+}
+
+@code {
+    [Parameter]
+    public string? username { get; set; }
+}

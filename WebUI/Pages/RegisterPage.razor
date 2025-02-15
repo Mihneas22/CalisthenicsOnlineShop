@@ -1,5 +1,60 @@
-﻿<h3>RegisterPage</h3>
+﻿@page "/register"
+@inject IUserService service;
+@inject NavigationManager navManager;
+@using Application.DTOs.UserDTOs.LoginUser
+@using Application.DTOs.UserDTOs.RegisterUser
+@using Application.Services.UserServices
+@using WebUI.State
 
+<div class="main-container-form">
+    <img src="icons/icon.png" />
+
+    <div class="basic-text-form">
+        Sign In
+    </div>
+
+    <div class="form-container">
+        <EditForm Model="registerDTO" OnSubmit="Register">
+            <label for="username">Username</label>
+            <div class="form-container-input">
+                <InputText @bind-Value="registerDTO.username" id="username"></InputText>
+            </div>
+
+            <label for="email">Email</label>
+            <div class="form-container-input">
+                <InputText @bind-Value="registerDTO.email" id="email"></InputText>
+            </div>
+
+            <label for="password">Password</label>
+            <div class="form-container-input">
+                <InputText @bind-Value="registerDTO.password" id="password"></InputText>
+            </div>
+
+            <label for="confpassword">Confirm Password</label>
+            <div class="form-container-input">
+                <InputText @bind-Value="registerDTO.confirmPassword" id="confpassword"></InputText>
+            </div>
+
+            <button class="form-button" type="submit">
+                <div class="form-button-text">
+                    Sign In
+                </div>
+            </button>
+        </EditForm>
+    </div>
+</div>
 @code {
+    private RegisterUserDTO registerDTO = new RegisterUserDTO();
 
+    private async Task Register()
+    {
+        if (registerDTO != null)
+        {
+            var result = await service.RegisterUserService(registerDTO);
+            if (result.Flag == true)
+            {
+                navManager.NavigateTo("/login", forceLoad: true);
+            }
+        }
+    }
 }
